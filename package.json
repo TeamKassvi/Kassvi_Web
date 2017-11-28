@@ -1,21 +1,32 @@
 {
-  "name": "awaaz-backend",
+  "name": "Team Kassvi",
   "version": "1.0.0",
-  "description": "",
+  "description": "Team Kassvi Website Code with UI and JS",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "engines":{
-    "node":"6.11.3"
+  "engines": {
+    "node": "6.11.3"
   },
-  "author": "Siddhant Chadha",
+  "author": "Team Kassvi",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mongodb": "^2.2.33",
     "mongoose": "^4.12.3"
-  }
+  },
+  "devDependencies": {
+    "mongoose": "^4.13.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeamKassvi/Suvi_Kassvi_Web.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TeamKassvi/Suvi_Kassvi_Web/issues"
+  },
+  "homepage": "https://github.com/TeamKassvi/Suvi_Kassvi_Web#readme"
 }
