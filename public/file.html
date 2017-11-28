@@ -165,7 +165,7 @@ var audio_context = new Context();
             url: {
                 tokenUrl: 'https://token.beyondverbal.com/token',
                 serverUrl: 'https://apiv3.beyondverbal.com/v3/recording/'
-               
+              
             },
             apiKey: "dd2dec2e-95e4-4412-9d88-c385c9a574a4",
             token: ''
@@ -205,7 +205,7 @@ var audio_context = new Context();
                 var reader = new FileReader();
                 reader.onload = function (e)
                 {
-                    analyzeFile("70b058f4-ac63-48b4-abdd-84f6fa1c9941", e.target.result)
+                    analyzeFile("dd2dec2e-95e4-4412-9d88-c385c9a574a4", e.target.result)
                         .done(function (res)
                         {
                             Show(res);
@@ -224,7 +224,7 @@ var audio_context = new Context();
         function authenticate()
         {
             console.log('url token:' + options.url.tokenUrl);
-            options.apiKey = "70b058f4-ac63-48b4-abdd-84f6fa1c9941";
+            options.apiKey = "dd2dec2e-95e4-4412-9d88-c385c9a574a4";
             return $.ajax({
                 url: options.url.tokenUrl,
                 type: "POST",
