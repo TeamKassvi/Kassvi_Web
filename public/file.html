@@ -282,10 +282,16 @@ var audio_context = new Context();
         }
         function Show(json)
         {
-            let parsedJson = JSON.parse(json);
+               let parsedJson = JSON.parse(json);
             console.log(parsedJson);
             if (parsedJson.result !== undefined){
-                $('#result').append(parsedJson.result.analysisSegments[0].analysis.Mood.Composite.Primary.Phrase); console.log(parsedJson.result.analysisSegments[0].analysis.Mood.Composite.Primary.Phrase);
+               
+                if(parsedJson.result.analysisSegments[0] === undefined){
+                    $('#result').append("Could not parse the audio.")
+                    
+                }else{
+            $('#result').append(parsedJson.result.analysisSegments[0].analysis.Mood.Composite.Primary.Phrase); console.log(parsedJson.result.analysisSegments[0].analysis.Mood.Composite.Primary.Phrase);
+                }
             }
         }
     </script>
@@ -295,7 +301,7 @@ var audio_context = new Context();
            if(window.localStorage.getItem("id")){
                window.localStorage.removeItem("id");
            } 
-               window.location = "http://www.teamawaaz.cf";
+               window.location = "http://www.teamakassvi.tech";
         });
     </script>
 </body>
