@@ -5,30 +5,61 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node ./start.js",
+    "watch": "nodemon ./start.js --ignore public/",
+    "dev": "concurrently 'npm run watch' 'npm run assets' --names '💻,📦' --prefix name",
+    "assets": "webpack -w --display-max-modules 0"
   },
   "engines": {
-    "node": "6.11.3",
-    "npm": "4.1.2"
+    "node": ">=7.6.0",
+    "npm": ">=4.1.2"
   },
   "author": "team_kassvi",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.2",
+    "axios": "^0.15.3",
+    "body-parser": "^1.17.1",
+    "concurrently": "^3.4.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.3.2",
+    "cookie-parser": "^1.4.3",
     "cool-ascii-faces": "1.3.4",
-    "express": "^4.16.2",
+    "dompurify": "^0.8.5",
+    "dotenv": "^4.0.0",
+    "es6-promisify": "^5.0.0",
+    "express": "^4.15.2",
+    "express-session": "^1.15.1",
+    "express-validator": "^3.1.2",
+    "faker": "^4.1.0",
+    "forever": "^0.15.3",
+    "glob": "^7.1.1",
+    "html-to-text": "^3.2.0",
+    "jimp": "^0.2.27",
+    "juice": "^4.0.2",
     "md5": "^2.2.1",
-    "mongodb": "^2.2.34",
+    "moment": "^2.17.1",
+    "mongoose": "^4.8.7",
     "mongoose-mongodb-errors": "0.0.2",
-    "passport-local-mongoose": "^4.4.0",
-    "validator": "^9.4.0"
+    "morgan": "^1.9.0",
+    "multer": "^1.3.0",
+    "nodemailer": "^3.1.5",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.0.0",
+    "pug": "^2.0.0-beta6",
+    "slugs": "^0.1.3",
+    "uuid": "^3.0.1",
+    "validator": "^7.0.0",
+    "web-audio-recorder-js": "0.0.2"
   },
   "devDependencies": {
-    "mongoose": "^4.13.10"
+    "mongoose": "^4.13.10",
+    "nodemon": "*",
+    "node-sass": "*"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TeamKassvi/Suvi_Kassvi_Web.git"
+    "url": "https://github.com/TeamKassvi/Suvi_Kassvi_Web.git"
   },
   "bugs": {
     "url": "https://github.com/TeamKassvi/Suvi_Kassvi_Web/issues"

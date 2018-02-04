@@ -17,16 +17,16 @@ var userSchema = new Schema({
         unique:true,
         required: 'Please enter your email',
         trim: true,
-        lowercase:true,
-        validate:[validator.isEmail, 'Invalid Email Address'],
+        lowercase:true
+        // validate: [{ validator: value => isEmail(value), msg: 'Invalid email.' }]
     },
     password: {
-        type: String,
-        required: true,
-    },
-    gender: {
         type: String
+        // required: true
     },
+    // gender: {
+    //     type: String
+    // },
     resetPasswordToken:String,
     resetPasswordExpires:Date,
 });

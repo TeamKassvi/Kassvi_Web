@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/testimonials.css">
 </head>
 <body>
+  
 
 <!-- Navbar -->
 <div class="navbar-fixed">
@@ -174,7 +175,7 @@
                                     <ul class="cd-author-info">
                                         <li><b>Suvigya Nijhawan</b><br>
                                         <p></p>
-                                        
+
                                           <a href="https://www.linkedin.com/in/suvigya-nijhawan-62330aa7/" target="_blank" class=""><img class="link" src="images/link.svg" alt="LinkedIn Logo" ></a>
 
                                           <a href="https://www.twitter.com/SuvigyaN/" target="_blank" class=""><img class="twi" src="images/twi.svg" alt="Twitter Logo" >
@@ -188,14 +189,14 @@
                         </li>
                         <li>
                             <div class="testimonial-content">
-                                <p>Java Slayer, Number Player and a Seasoned Voyager in the sea of difficulties. A self-taught android developer who can create applications in the blink of an eye. Passionate about coding Currently a final year student pursuing Computer Engineering from Delhi Technological University. 
+                                <p>Java Slayer, Number Player and a Seasoned Voyager in the sea of difficulties. A self-taught android developer who can create applications in the blink of an eye. Passionate about coding Currently a final year student pursuing Computer Engineering from Delhi Technological University.
  </p>
                                 <div class="cd-author">
                                     <img class="authimg" src="images/kar.jpg" alt="Suvigya's image">
                                     <ul class="cd-author-info">
                                         <li><b>Kartik Bhutani</b><br>
                                         <p></p>
-                                        
+
                                           <a href="https://www.linkedin.com/in/kartikbhutani/" target="_blank" class=""><img class="link" src="images/link.svg" alt="LinkedIn Logo" ></a>
 
                                           <a href="https://www.twitter.com/kartik_bhutani/" target="_blank" class=""><img class="twi" src="images/twi.svg" alt="Twitter Logo" >
@@ -216,7 +217,7 @@
                                     <ul class="cd-author-info">
                                         <li><b>Sonam Tshering</b><br>
                                         <p></p>
-                                        
+
                                           <a href="https://www.linkedin.com/in//" target="_blank" class=""><img class="link" src="images/link.svg" alt="LinkedIn Logo" ></a>
 
                                           <a href="https://www.twitter.com/sonamtsh1328/" target="_blank" class=""><img class="twi" src="images/twi.svg" alt="Twitter Logo" >
@@ -236,7 +237,7 @@
                                     <ul class="cd-author-info">
                                         <li><b>Viha Gupta</b><br>
                                         <p></p>
-                                        
+
                                           <a href="https://www.linkedin.com/in/viha-gupta-6986a2143/" target="_blank" class=""><img class="link" src="images/link.svg" alt="LinkedIn Logo" ></a>
 
                                           <a href="https://www.twitter.com/vihagupta95/" target="_blank" class=""><img class="twi" src="images/twi.svg" alt="Twitter Logo" >
@@ -319,7 +320,7 @@
         <div class="row">
             <div class="col l6 s12">
                 <h5 class="white-text">Connect</h5>
-                <p class="grey-text text-lighten-4"> 
+                <p class="grey-text text-lighten-4">
 
         For Further Enquiries,<br />
         Please Contact :<br/>
@@ -345,7 +346,7 @@
     </div>
     <div class="footer-copyright">
         <div class="container">
-            © 2017 All Rights Reserved - TEAM KASSVI 
+            © 2017 All Rights Reserved - TEAM KASSVI
           <!--  <a class="grey-text text-lighten-4 right" href="#!">More Links</a>-->
         </div>
     </div>
@@ -418,7 +419,7 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function($) {
-        
+
         // smooth scroll
         $(document).on('click', 'a[href^="#"]', function (event) {
     event.preventDefault();
@@ -427,7 +428,7 @@
         scrollTop: $($.attr(this, 'href')).offset().top
     }, 500);
         });
-        
+
         //create the slider
         $(".cd-testimonials-wrapper").flexslider({
             selector: ".cd-testimonials > li",
@@ -447,9 +448,9 @@
 
 
         $("#login_btn").click(function () {
-        
+
             //console.log(document.getElementById("email").value);
-            
+
             $.ajax({
                 url: '/signin',
                 type: 'POST',
@@ -468,9 +469,9 @@
                 }
             });
         });
-        
+
         $("#signup_btn").click(function () {
-            
+
             console.log("name", document.getElementById("name-su").value);
             console.log("email", document.getElementById("email-su").value);
               $.ajax({
@@ -491,21 +492,21 @@
                 }
             });
         });
-        
+
         $("#show_signup").click(function () {
-           $(this).css("color","purple"); 
-           $("#show_login").css("color","blue");    
+           $(this).css("color","purple");
+           $("#show_login").css("color","blue");
            $(".login").css("display","none");
-           $(".signup").css("display","block");    
+           $(".signup").css("display","block");
         });
-        
+
          $("#show_login").click(function () {
-           $(this).css("color","purple"); 
-           $("#show_signup").css("color","blue");      
+           $(this).css("color","purple");
+           $("#show_signup").css("color","blue");
            $(".login").css("display","block");
-           $(".signup").css("display","none");    
+           $(".signup").css("display","none");
         });
-        
+
         $("#app-btn").click(function() {
             if (window.localStorage.getItem("id")){
                 window.location = "/app/" + window.localStorage.getItem("id");
@@ -515,8 +516,8 @@
         });
     });
 
-    
-     
+
+
 
 </script>
 </body>

@@ -17,9 +17,13 @@ var emotionSchema = new Schema({
       type:Date,
       default:Date.now
     },
-    emotions: {
+    duration:{
+      type:Number,
+      required:true
+    },
+    emotion: {
        type: Array
     }
 });
 
-module.exports = mongoose.model('Emotion', userEmotion);
+module.exports = mongoose.model('Emotion', emotionSchema);

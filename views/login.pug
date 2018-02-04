@@ -1,0 +1,20 @@
+//- extends layout
+//- 
+//- include mixins/_loginForm
+//- include mixins/_forgot
+//- 
+//-  block content
+//-    .inner
+//-     //- +forgotForm()
+//-     +loginForm()
+extends layout
+
+block content
+  .inner
+    form.form(action="/login" method="POST")
+      h2 Login
+      label(for="email") Email Address
+      input(type="email" name="email")
+      label(for="password") Password
+      input(type="password" name="password")
+      input.button(type="submit" value="Log In →")

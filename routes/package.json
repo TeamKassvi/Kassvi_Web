@@ -1,0 +1,38 @@
+{
+  "name": "team_kassvi",
+  "version": "1.0.0",
+  "description": "Team Kassvi Website Code with UI and JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./start.js",
+  },
+  "engines": {
+    "node": ">=7.6.0",
+    "npm": ">=4.1.2"
+  },
+  "keywords":["tag1", "tag2","tag3"],
+  "author": {
+    "name":"team_kassvi",
+    "email":"feedback@teamkassvi.com",
+    "url":"amit.teamkassvi.com"
+  },
+  "license": {
+    "type" : "ISC",
+    "url" : "https://opensource.org/licenses/ISC"
+    },
+  "dependencies": {
+    "express": "^4.15.2",
+  },
+  "devDependencies": {
+    "nodemon": "*",
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TeamKassvi/Suvi_Kassvi_Web.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TeamKassvi/Suvi_Kassvi_Web/issues",
+    "email":"feedback@projectkassvi.com"
+  }
+}
