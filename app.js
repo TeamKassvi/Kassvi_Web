@@ -7,14 +7,12 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const sgMail = require('@sendgrid/mail');
 const promisify = require('es6-promisify');
 const flash = require('connect-flash');
 const expressValidator = require('express-validator');
 const helpers = require('./helpers');
 const errorHandlers = require('./handlers/errorHandlers');
 require('./handlers/passport');
-sgMail.setApiKey(process.env.SENDGRID_API);
 //routes variables
 const routes = require('./routes/index');
 

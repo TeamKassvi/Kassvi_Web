@@ -5,19 +5,10 @@ const juice = require('juice');
 const htmlToText = require('html-to-text');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const sgMail = require('@sendgrid/mail');
 var postmark = require("postmark");
 var client = new postmark.Client(process.env.POSTMARK_API);
 
 const promisify = require('es6-promisify');
-// const mail = require('../handlers/mail');
-
-// const generateHTML = (filename, options = {}) => {
-//   const html = pug.renderFile(`${__dirname}/../views/email/${filename}.pug`, options);
-//   const inlined = juice(html);
-//   return inlined;
-// };
-
 
 exports.login = passport.authenticate('local', {
   failureRedirect: '/login',
@@ -57,10 +48,16 @@ exports.forgot = async (req, res) => {
   const resetURL = `http://${req.headers.host}/account/reset/${user.resetPasswordToken}`;
   client.sendEmail({
     "From": "parikshit_bt2k16@dtu.ac.in",
-    "To": "parikshit_bt2k16@dtu.ac.in",
+    "To": user.email,
     "Subject": "PASSWORD RESET LINK",
-    "TextBody": "this is password reset link"
-  });
+    "TextBody": `this is password reset link ${resetURL}`
+  }, function(error, result) {
+    if(error) {
+        console.error("Unable to send via postmark: " + error.message);
+        return;
+    }
+    console.info("Sent to postmark for delivery")
+});
 
   req.flash('success', `You have been emailed a password reset link. Check your spam folder too!`);
   // 4. redirect to login page
