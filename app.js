@@ -7,13 +7,14 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const sgMail = require('@sendgrid/mail');
 const promisify = require('es6-promisify');
 const flash = require('connect-flash');
 const expressValidator = require('express-validator');
 const helpers = require('./helpers');
 const errorHandlers = require('./handlers/errorHandlers');
 require('./handlers/passport');
-
+sgMail.setApiKey(process.env.SENDGRID_API);
 //routes variables
 const routes = require('./routes/index');
 
@@ -27,7 +28,7 @@ app.set('view engine', 'pug'); // we use the engine pug, mustache or EJS work gr
 
 // const port = process.env.PORT || 3000;
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is
 app.use(express.static(path.join(__dirname, 'public')));
 

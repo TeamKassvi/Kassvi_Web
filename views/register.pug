@@ -13,3 +13,8 @@ form.form(action="/signup" method="POST")
   label(for="password-confirm") Confirm Password
   input(type="password" name="password-confirm")
   input.button(type="submit" value="Register →")
+form.form(action="/account/forgot" method="POST")
+  h3 Forgot Password
+  label(for="email") Email
+  input(type="text" name="email")
+  input.button(type="submit" value="Reset Password")

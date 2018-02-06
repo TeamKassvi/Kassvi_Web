@@ -1,9 +1,23 @@
 const passport = require('passport');
 const crypto = require('crypto');
+const pug = require('pug');
+const juice = require('juice');
+const htmlToText = require('html-to-text');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const sgMail = require('@sendgrid/mail');
+var postmark = require("postmark");
+var client = new postmark.Client(process.env.POSTMARK_API);
+
 const promisify = require('es6-promisify');
-const mail = require('../handlers/mail');
+// const mail = require('../handlers/mail');
+
+// const generateHTML = (filename, options = {}) => {
+//   const html = pug.renderFile(`${__dirname}/../views/email/${filename}.pug`, options);
+//   const inlined = juice(html);
+//   return inlined;
+// };
+
 
 exports.login = passport.authenticate('local', {
   failureRedirect: '/login',
@@ -33,7 +47,7 @@ exports.forgot = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
     req.flash('error', 'Password reset instructions have been sent to your email');
-    return res.redirect('/login');
+    return res.redirect('/');
   }
   // 2. Set reset tokens and expiry on their account
   user.resetPasswordToken = crypto.randomBytes(20).toString('hex');
@@ -41,15 +55,17 @@ exports.forgot = async (req, res) => {
   await user.save();
   // 3. Send them an email with the token
   const resetURL = `http://${req.headers.host}/account/reset/${user.resetPasswordToken}`;
-  await mail.send({
-    user,
-    filename: 'password-reset',
-    subject: 'Password Reset',
-    resetURL
+  client.sendEmail({
+    "From": "parikshit_bt2k16@dtu.ac.in",
+    "To": "parikshit_bt2k16@dtu.ac.in",
+    "Subject": "PASSWORD RESET LINK",
+    "TextBody": "this is password reset link"
   });
-  req.flash('success', `You have been emailed a password reset link.`);
+
+  req.flash('success', `You have been emailed a password reset link. Check your spam folder too!`);
   // 4. redirect to login page
   res.redirect('/login');
+
 };
 
 exports.reset = async (req, res) => {
