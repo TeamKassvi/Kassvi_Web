@@ -1,8 +1,8 @@
 const passport = require('passport');
 const crypto = require('crypto');
-const pug = require('pug');
-const juice = require('juice');
-const htmlToText = require('html-to-text');
+// const pug = require('pug');
+// const juice = require('juice');
+// const htmlToText = require('html-to-text');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 var postmark = require("postmark");
@@ -46,11 +46,17 @@ exports.forgot = async (req, res) => {
   await user.save();
   // 3. Send them an email with the token
   const resetURL = `http://${req.headers.host}/account/reset/${user.resetPasswordToken}`;
-  client.sendEmail({
+  client.sendEmailWithTemplate({
     "From": "parikshit_bt2k16@dtu.ac.in",
+    "TemplateId": "4871122",
     "To": user.email,
-    "Subject": "PASSWORD RESET LINK",
-    "TextBody": `this is password reset link ${resetURL}`
+    "TemplateModel": {
+    "action_url" : resetURL,
+    "support_url" : "parikshit_bt2k16@dtu.ac.in"
+}
+    // "To": user.email,
+    // "Subject": "PASSWORD RESET LINK",
+    // "TextBody": `this is password reset link ${resetURL}`
   }, function(error, result) {
     if(error) {
         console.error("Unable to send via postmark: " + error.message);
