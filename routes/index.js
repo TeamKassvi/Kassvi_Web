@@ -3,6 +3,7 @@ const router = express.Router();
 const siteController = require('../controllers/siteController');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
+const emotionController = require('../controllers/emotionController');
 // const reviewController = require('../controllers/reviewController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
@@ -33,6 +34,7 @@ router.get('/', siteController.getHomepage);
 router.get('/login', userController.loginForm);
 router.post('/login', authController.login);
 router.get('/signup', userController.registerForm);
+router.get('/analyser', emotionController.getAnalyser);
 
 // 1. Validate the registration data
 // 2. register the user
