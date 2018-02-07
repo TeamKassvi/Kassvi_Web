@@ -1,8 +1,5 @@
 const passport = require('passport');
 const crypto = require('crypto');
-// const pug = require('pug');
-// const juice = require('juice');
-// const htmlToText = require('html-to-text');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 var postmark = require("postmark");
