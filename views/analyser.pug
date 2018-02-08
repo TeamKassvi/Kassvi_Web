@@ -4,4 +4,9 @@ block content
   p this is analyser
   p todo: analyse voice by three ways: realtime, record whole and then analyse, upload audio
   go - upload voice and analyze
-  
+  form(method='POST' action='/analyser/uploadFileSubmit' enctype="multipart/form-data")
+      label(for='uploadFile') Upload Audio File
+      input(name="uploadFile" type="file" id="uploadFile" accept="audio/wav, audio/mp3, audio/ogg")   
+      button.btn.waves-effect.waves-light(type='submit', name='uploadFileSubmit')
+        | Submit
+        i.material-icons.right send

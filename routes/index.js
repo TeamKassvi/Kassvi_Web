@@ -35,6 +35,10 @@ router.get('/login', userController.loginForm);
 router.post('/login', authController.login);
 router.get('/signup', userController.registerForm);
 router.get('/analyser', emotionController.getAnalyser);
+router.post('/analyser/uploadFileSubmit',
+ emotionController.uploadFile, 
+ emotionController.uploadFileSubmit);
+// router.post('/analyser/uploadFileSubmit', emotionController.uploadFileSubmit);
 
 // 1. Validate the registration data
 // 2. register the user
