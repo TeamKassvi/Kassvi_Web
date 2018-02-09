@@ -5,6 +5,8 @@ const request = require('request');
 const formidable = require('formidable');
 const formData = require('form-data');
 const path = require('path');
+const Extractor = require("html-extractor");
+const rp = require('request-promise').defaults({simple:false});
 const sbuff = require('simple-bufferstream')
 var fs = require('fs');
 
@@ -14,7 +16,7 @@ const multerOptions = {
       callback(null, './public/audioUploads');
     },
     filename:function(req,file,callback){
-      console.log(file);
+      // console.log(file);
       callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
   }),
@@ -42,28 +44,46 @@ if(!req.file)
     next();
     return;
   }
+  console.log(req.file);
+  console.log(req.file.path);
 
-// fs.createWriteStream('newfilefile.mp3', './public/uploads/myfilefile.mp3');
+var options = { method: 'POST',
+  url: 'http://g711.org/submit/',
+  headers:
+   {
+     'Content-Type': 'application/x-www-form-urlencoded',
+     'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
+  formData:
+   { userfile:
+      { value: fs.createReadStream(req.file.path), //'fs.createReadStream("D:\\music\\02 Break Up Every Night.mp3")'
+        options: { filename: req.file.path,   // 'D:\\music\\02 Break Up Every Night.mp3'
+          contentType: null
+         } },
+     platform: 'asterisk',
+     volume: '20',
+     bandpass: '1' } };
 
+rp(options)
+.then((error, response, body) => {
+  if (error) throw new Error(error);
 
-// var options = { method: 'POST',
-//   url: 'http://g711.org/submit/',
-//   headers:
-//    {
-//      'Content-Type': 'application/x-www-form-urlencoded',
-//      'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
-//   formData:
-//    { userfile:
-//       { value: 'fs.createReadStream("req.file.buffer")',
-//         options: { filename: 'req.file.buffer', contentType: null } },
-//      platform: 'asterisk',
-//      volume: '20',
-//      bandpass: '1' } };
-//
-// request(options, function (error, response, body) {
-//   if (error) throw new Error(error);
-//
-//   console.log(body);
+  else {
+    console.log(response);
+
+    console.log('body returned ' + body);
+  // var myExtractor = new Extractor();
+
+// var html = body;
+// myExtractor.extract(html, function(err, data){
+//   if(err)
+//   throw err;
+//   else console.log(data);
+// });
+}
+});
+
+// .catch(error =>{
+// });
 // });
 
 };
