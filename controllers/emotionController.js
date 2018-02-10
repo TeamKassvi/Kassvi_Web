@@ -1,16 +1,13 @@
 const mongoose = require('mongoose');
 const Emotion = mongoose.model('Emotion');
 const multer = require('multer');
-// const request = require('request');
 const path = require('path');
-const ffmpeg = require('ffmpeg-win');
-// const Extractor = require("html-extractor");
-// const rp = require('request-promise').defaults({simple:false});
 var fs = require('fs');
-const Ffmpeg = require('./test');
+const audioConvertAndUpload = require('../handlers/audioConvertAndUpload');
 
-
-
+exports.getAnalyser = (req,res) =>{
+  res.render('analyser');
+};
 
 const multerOptions = {
   storage: multer.diskStorage({
@@ -30,14 +27,9 @@ const multerOptions = {
       next({ message: 'That filetype isn\'t allowed!' }, false);
     }
   }
-};
+};  //multer options
 
-exports.uploadFile = multer(multerOptions).single('uploadFile');
-
-
-exports.getAnalyser = (req,res) =>{
-  res.render('analyser');
-};
+exports.uploadFile = multer(multerOptions).single('uploadFile'); //file upload
 
 exports.uploadFileSubmit = (req,res) =>{
 
@@ -46,22 +38,10 @@ if(!req.file)
     next();
     return;
   }
-  console.log(req.file);
-  Ffmpeg.wavConvert();
-//correct above
-
-// function done(err) {
-//   if (err) throw err;
-//   console.log('ok, done');
-// }
-//
-// const tempName = req.file.filename.split('.');
-// const wavName = tempName[0];
-// console.log(wavName);
-
-// console.log(wavName[0]);
-
-// ffmpeg.wav(`./${req.file.path}`, `./audioUploads/${wavName}.wav`, done);
-
-
+  var tempName=req.file.filename.split('.');
+  var filename = tempName[0];
+  // console.log(req.file);
+  console.log(req.file.filename);
+  audioConvertAndUpload.wavConvert(req.file.filename, filename);
+  res.redirect('/analyser');
 };
