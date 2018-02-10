@@ -58,9 +58,10 @@
     "web-audio-recorder-js": "0.0.2"
   },
   "devDependencies": {
+    "ffmpeg-win": "github:jeromedecoster/ffmpeg-win",
     "mongoose": "^4.13.10",
-    "nodemon": "*",
-    "node-sass": "*"
+    "node-sass": "*",
+    "nodemon": "*"
   },
   "repository": {
     "type": "git",

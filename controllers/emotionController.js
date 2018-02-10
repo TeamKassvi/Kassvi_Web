@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 const Emotion = mongoose.model('Emotion');
 const multer = require('multer');
 const request = require('request');
-const formidable = require('formidable');
-const formData = require('form-data');
 const path = require('path');
+const ffmpeg = require('ffmpeg-win');
 const Extractor = require("html-extractor");
 const rp = require('request-promise').defaults({simple:false});
-const sbuff = require('simple-bufferstream')
 var fs = require('fs');
+
+
+
 
 const multerOptions = {
   storage: multer.diskStorage({
@@ -37,7 +38,7 @@ exports.getAnalyser = (req,res) =>{
   res.render('analyser');
 };
 
-exports.uploadFileSubmit = async (req,res) =>{
+exports.uploadFileSubmit = (req,res) =>{
 
 if(!req.file)
   {
@@ -45,45 +46,20 @@ if(!req.file)
     return;
   }
   console.log(req.file);
-  console.log(req.file.path);
+//correct above
 
-var options = { method: 'POST',
-  url: 'http://g711.org/submit/',
-  headers:
-   {
-     'Content-Type': 'application/x-www-form-urlencoded',
-     'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
-  formData:
-   { userfile:
-      { value: fs.createReadStream(req.file.path), //'fs.createReadStream("D:\\music\\02 Break Up Every Night.mp3")'
-        options: { filename: req.file.path,   // 'D:\\music\\02 Break Up Every Night.mp3'
-          contentType: null
-         } },
-     platform: 'asterisk',
-     volume: '20',
-     bandpass: '1' } };
-
-rp(options)
-.then((error, response, body) => {
-  if (error) throw new Error(error);
-
-  else {
-    console.log(response);
-
-    console.log('body returned ' + body);
-  // var myExtractor = new Extractor();
-
-// var html = body;
-// myExtractor.extract(html, function(err, data){
-//   if(err)
-//   throw err;
-//   else console.log(data);
-// });
+function done(err) {
+  if (err) throw err;
+  console.log('ok, done');
 }
-});
 
-// .catch(error =>{
-// });
-// });
+const tempName = req.file.filename.split('.');
+const wavName = tempName[0];
+console.log(wavName);
+
+// console.log(wavName[0]);
+
+ffmpeg.wav(req.file.path, `/public/audioUploads/${wavName}.wav`, done);
+
 
 };
