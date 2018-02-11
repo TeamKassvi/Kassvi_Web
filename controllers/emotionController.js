@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Emotion = mongoose.model('Emotion');
 const multer = require('multer');
+const promisify = require('es6-promisify');
+const del = require('delete');
 const path = require('path');
 var fs = require('fs');
 const audioConvertAndUpload = require('../handlers/audioConvertAndUpload');
@@ -31,17 +33,38 @@ const multerOptions = {
 
 exports.uploadFile = multer(multerOptions).single('uploadFile'); //file upload
 
-exports.uploadFileSubmit = (req,res) =>{
+exports.uploadFileSubmit = async (req,res) =>{
+  if(!req.file)
+    {
+      next();
+      return;
+    }  //if file not found, return
 
-if(!req.file)
-  {
-    next();
-    return;
-  }
-  var tempName=req.file.filename.split('.');
-  var filename = tempName[0];
-  // console.log(req.file);
+  let tempName=req.file.filename.split('.');
+  let filename = tempName[0];
   console.log(req.file.filename);
-  audioConvertAndUpload.wavConvert(req.file.filename, filename);
+  // const wavConvertPromisify = promisify();
+  await audioConvertAndUpload.wavConvert(req.file.filename, filename);
+  // await wavConvertPromisify();
+
+  //working fine below
+  // async
+del([`${req.file.path}`], function(err, deleted) {
+  if (err)
+    console.log('error');
+  // deleted files
+  console.log('deleted' + deleted);
+});
+
+  // del.promise()
+  // .then(function(deleted, err){
+  //   if(err)
+  //     console.log('error');
+  //   console.log('deleted + ' + deleted);
+  // });
+  // catch(error =>{
+  //   console.log('error');
+  //   return;
+  // });
   res.redirect('/analyser');
 };

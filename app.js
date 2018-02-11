@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const MongoStore = require('connect-mongo')(session);
 const path = require('path');
+// const del = require('delete');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const passport = require('passport');
