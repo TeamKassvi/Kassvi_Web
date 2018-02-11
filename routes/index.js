@@ -36,8 +36,9 @@ router.post('/login', authController.login);
 router.get('/signup', userController.registerForm);
 router.get('/analyser', emotionController.getAnalyser);
 router.post('/analyser/uploadFileSubmit',
- emotionController.uploadFile, 
+ emotionController.uploadFile,
  emotionController.uploadFileSubmit);
+router.get('/recordandconvert', emotionController.getrecordandconvert);
 // router.post('/analyser/uploadFileSubmit', emotionController.uploadFileSubmit);
 
 // 1. Validate the registration data

@@ -10,6 +10,9 @@ const audioConvertAndUpload = require('../handlers/audioConvertAndUpload');
 exports.getAnalyser = (req,res) =>{
   res.render('analyser');
 };
+exports.getrecordandconvert = (req,res) =>{
+  res.render('recordandconvert');
+};
 
 const multerOptions = {
   storage: multer.diskStorage({

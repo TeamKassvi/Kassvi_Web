@@ -10,3 +10,23 @@ block content
       button.btn.waves-effect.waves-light(type='submit', name='uploadFileSubmit')
         | Submit
         i.material-icons.right send
+        
+  p go - record voice and then convert and analyze
+  button(onclick="startRecording(this)") record
+  button(onclick="stopRecording(this)") stop
+  
+  h2 Recordings
+  ul(id="recordingslist")
+  
+  h2 Log
+  pre(id="log")
+  //- a(id="analyser" class="waves-effect waves-light btn" href="#" onclick ="toggleRecording(this)") Record
+  //- a(class="waves-effect waves-light btn" href="#" onclick ="stopRecording()") Stop
+  script(type="text/javascript", src="js/recorder.js")
+  script(type="text/javascript", src="js/recordingfile.js")
+  //- script(type="text/javascript", src="js/recorderWorker.js")
+  //- script(type="text/javascript", src="js/recorderMain.js")
+  //- script(type="text/javascript").
+  //-   window.addEventListener('load', function(e){
+  //-     e.preventDefault();
+  //-   });
