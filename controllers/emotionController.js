@@ -8,11 +8,11 @@ var fs = require('fs');
 const audioConvertAndUpload = require('../handlers/audioConvertAndUpload');
 
 exports.getAnalyser = (req,res) =>{
-  res.render('analyser');
+  res.sendFile(process.cwd()+'/views/file.html');
 };
-exports.getrecordandconvert = (req,res) =>{
-  res.render('recordandconvert');
-};
+// exports.getrecordandconvert = (req,res) =>{
+//   res.render('recordandconvert');
+// };
 
 const multerOptions = {
   storage: multer.diskStorage({
@@ -48,26 +48,23 @@ exports.uploadFileSubmit = async (req,res) =>{
   console.log(req.file.filename);
   // const wavConvertPromisify = promisify();
   await audioConvertAndUpload.wavConvert(req.file.filename, filename);
-  // await wavConvertPromisify();
 
-  //working fine below
-  // async
 del([`${req.file.path}`], function(err, deleted) {
   if (err)
     console.log('error');
   // deleted files
   console.log('deleted' + deleted);
 });
-
-  // del.promise()
-  // .then(function(deleted, err){
-  //   if(err)
-  //     console.log('error');
-  //   console.log('deleted + ' + deleted);
-  // });
-  // catch(error =>{
-  //   console.log('error');
-  //   return;
-  // });
   res.redirect('/analyser');
+};
+
+exports.recordFileConvert = (req,res) =>{
+  if(!req.file)
+    {
+      next();
+      return;
+    }
+  console.log('record file submitt log');
+  console.log(req.body);
+  console.log(req.file);
 };

@@ -1,28 +1,49 @@
-var fs = require("fs");
-var request = require("request");
-var rp = require('request-promise');
-
-var options = { method: 'POST',
-  url: 'http://g711.org/submit/',
-  headers:
-   {
-     // 'Postman-Token': '53a0c623-df97-9ad2-d0c2-38c9b9d73c03',
-     'Cache-Control': 'no-cache',
-     'Content-Type': 'application/x-www-form-urlencoded',
-     'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
-  formData:
-   { userfile:
-      { value: 'fs.createReadStream("D:\\music\\02 Send My Love (To Your New Lover).m4a")',
-        options:
-         { filename: 'D:\\music\\02 Send My Love (To Your New Lover).m4a',
-           contentType: null } },
-     platform: 'asterisk',
-     volume: '20',
-     bandpass: '1' } };
-
-rp(options)
-.then((error, response, body) => {
-  if (error) console.log('error');
-  console.log(response);
-  console.log(body);
+const WaveRecorder = require('wave-recorder');
+var recorder = WaveRecorder({
+  channels:"1",
+  bitDepth:"16",
+  silenceDuration:"5"
 });
+
+navigator.webkitPersistentStorage.requestQuota(1024*1024, function(grantedBytes) {
+  window.webkitRequestFileSystem(PERSISTENT, grantedBytes, onInit)
+})
+
+function onInit(fileSystem){
+  var fs = WebFS(fileSystem.root)
+  var audioContext = new AudioContext()
+
+  navigator.webkitGetUserMedia({audio:true}, function(stream) {
+
+    // get the mic input
+    var audioInput = audioContext.createMediaStreamSource(stream)
+
+    // create the recorder instance
+    var recorder = WaveRecorder(audioContext, {
+      channels: 2,
+      bitDepth: 32
+    })
+
+    audioInput.connect(recorder.input)
+
+    var filePath = 'test.wav'
+    var fileStream = fs.createWriteStream(filePath)
+    recorder.pipe(fileStream)
+
+    // // optionally go back and rewrite header with updated length
+    // recorder.on('header', function(header){
+    //   var headerStream = fs.createWriteStream(path, {
+    //     start: 0,
+    //     flags: 'r+'
+    //   })
+    //
+    //   headerStream.write(header)
+    //   headerStream.end()
+    // })
+
+    // record for 10 seconds then stop
+    setTimeout(function(){
+      recorder.end()
+    }, 10000)
+  })
+}
